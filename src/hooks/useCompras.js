@@ -7,6 +7,7 @@ import {
   doc,
   query,
   orderBy,
+  limit,
   getDocs,
   getDoc,
   writeBatch,
@@ -24,15 +25,15 @@ export function useCompras() {
     return Math.floor(10000 + Math.random() * 90000).toString();
   };
 
-  // Lista compras com filtros
-  const listarCompras = async (searchTerm = '') => {
+  // Lista compras com filtros e limit
+  const listarCompras = async (searchTerm = '', limitCount = 50) => {
     try {
       setLoading(true);
       setError(null);
       const comprasRef = collection(db, 'compras');
 
-      // Buscar todas as compras
-      const queryRef = query(comprasRef, orderBy('dataCompra', 'desc'));
+      // Buscar apenas as últimas compras (com limit)
+      const queryRef = query(comprasRef, orderBy('dataCompra', 'desc'), limit(limitCount));
       const snapshot = await getDocs(queryRef);
 
       let comprasData = snapshot.docs.map(doc => ({

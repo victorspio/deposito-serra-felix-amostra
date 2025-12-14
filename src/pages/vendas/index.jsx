@@ -43,16 +43,11 @@ export default function VendasPage() {
   // Debounce para busca
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
-  // Carregamento inicial otimizado
+  // Carregamento inicial otimizado - carregar apenas vendas
   useEffect(() => {
     const carregarDadosIniciais = async () => {
       try {
-        // Carregar em paralelo para melhor performance
-        await Promise.all([
-          listarClientes(),
-          listarVendas(),
-          listarProdutos()
-        ]);
+        await listarVendas();
         setCarregamentoInicial(false);
       } catch (error) {
         console.error('Erro no carregamento inicial:', error);
@@ -61,6 +56,16 @@ export default function VendasPage() {
     };
     carregarDadosIniciais();
   }, []);
+
+  // Carregar clientes e produtos apenas quando abrir o formulário
+  useEffect(() => {
+    if (showForm && (clientes.length === 0 || produtos.length === 0)) {
+      Promise.all([
+        clientes.length === 0 ? listarClientes() : Promise.resolve(),
+        produtos.length === 0 ? listarProdutos() : Promise.resolve()
+      ]);
+    }
+  }, [showForm]);
 
   // Recarrega vendas quando filtros mudam (com debounce)
   useEffect(() => {

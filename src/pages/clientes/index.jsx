@@ -59,14 +59,11 @@ export default function ClientesPage() {
   // Debounce para busca
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
-  // Carregamento inicial otimizado
+  // Carregamento inicial otimizado - carregar apenas clientes
   useEffect(() => {
     const carregarDadosIniciais = async () => {
       try {
-        await Promise.all([
-          listarClientes(),
-          listarProdutos()
-        ]);
+        await listarClientes();
       } catch (error) {
         console.error('Erro ao carregar dados iniciais:', error);
       } finally {
@@ -75,6 +72,13 @@ export default function ClientesPage() {
     };
     carregarDadosIniciais();
   }, []);
+
+  // Carregar produtos apenas quando necessário (histórico)
+  useEffect(() => {
+    if (showHistorico && produtos.length === 0) {
+      listarProdutos();
+    }
+  }, [showHistorico]);
 
   // Recarrega clientes quando o termo de busca muda (com debounce)
   useEffect(() => {

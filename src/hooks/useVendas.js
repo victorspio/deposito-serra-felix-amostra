@@ -8,6 +8,7 @@ import {
   query,
   where,
   orderBy,
+  limit,
   getDocs,
   getDoc,
   writeBatch
@@ -22,15 +23,15 @@ import { db } from '../services/firebase';export function useVendas() {
     return Math.floor(10000 + Math.random() * 90000).toString();
   };
 
-  // Lista vendas com filtros
-  const listarVendas = async (searchTerm = '', statusFiltro = null) => {
+  // Lista vendas com filtros e limit
+  const listarVendas = async (searchTerm = '', statusFiltro = null, limitCount = 50) => {
     try {
       setLoading(true);
       setError(null);
       const vendasRef = collection(db, 'vendas');
       
-      // Buscar todas as vendas
-      const queryRef = query(vendasRef, orderBy('dataVenda', 'desc'));
+      // Buscar apenas as últimas vendas (com limit)
+      const queryRef = query(vendasRef, orderBy('dataVenda', 'desc'), limit(limitCount));
       const snapshot = await getDocs(queryRef);
       
       let vendasData = snapshot.docs.map(doc => ({
