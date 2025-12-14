@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
+  base: '/deposito-serra-felix-amostra/',
   server: {
     port: 3000
   },
