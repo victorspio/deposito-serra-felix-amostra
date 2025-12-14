@@ -5,12 +5,12 @@ import { getAuth } from 'firebase/auth';
 import { getStorage } from 'firebase/storage';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCMzQvw7qcxw6tB-P6y6HC5X6uH2ZW4-go",
-  authDomain: "deposito-serra-felix.firebaseapp.com",
-  projectId: "deposito-serra-felix",
-  storageBucket: "deposito-serra-felix.firebasestorage.app",
-  messagingSenderId: "536757368497",
-  appId: "1:536757368497:web:a836ba88591bc3caf25490"
+  apiKey: "YOUR_API_KEY",
+  authDomain: "your-project.firebaseapp.com",
+  projectId: "your-project-id",
+  storageBucket: "your-project.firebasestorage.app",
+  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+  appId: "YOUR_APP_ID"
 };
 
 // Inicialização singleton do Firebase

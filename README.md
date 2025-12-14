@@ -36,8 +36,21 @@ yarn
 \`\`\`
 
 3. Configure o Firebase:
-   - Copie o arquivo `src/services/firebase.js`
-   - Substitua as credenciais com as suas do console do Firebase
+   - Crie um projeto no [Firebase Console](https://console.firebase.com)
+   - Habilite Firestore Database e Authentication
+   - Copie suas credenciais do Firebase
+   - Abra o arquivo `src/services/firebase.js`
+   - Substitua os valores de exemplo pelas suas credenciais reais:
+     ```javascript
+     const firebaseConfig = {
+       apiKey: "SUA_API_KEY_AQUI",
+       authDomain: "seu-projeto.firebaseapp.com",
+       projectId: "seu-projeto-id",
+       storageBucket: "seu-projeto.firebasestorage.app",
+       messagingSenderId: "SEU_MESSAGING_SENDER_ID",
+       appId: "SEU_APP_ID"
+     };
+     ```
 
 4. Inicie o servidor de desenvolvimento:
 \`\`\`powershell
