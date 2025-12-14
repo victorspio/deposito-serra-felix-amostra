@@ -11,7 +11,7 @@ const Logo = ({ className = "", size = "md" }) => {
   return (
     <div className={`flex items-center ${className}`}>
       <img 
-        src="/logo-serra-felix.png" 
+        src={`${import.meta.env.BASE_URL}logo-serra-felix.png`}
         alt="Serra do Félix - Material de Construção" 
         className={sizes[size]}
       />
