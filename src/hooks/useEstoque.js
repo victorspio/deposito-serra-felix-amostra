@@ -7,7 +7,8 @@ import {
   doc, 
   query, 
   where, 
-  orderBy, 
+  orderBy,
+  limit,
   getDocs,
   serverTimestamp
 } from 'firebase/firestore';
@@ -28,7 +29,7 @@ export function useEstoque() {
       setError(null);
 
       const produtosRef = collection(db, 'produtos');
-      let queryRef = query(produtosRef, orderBy('nome'));
+      let queryRef = query(produtosRef, orderBy('nome'), limit(100));
 
       // Aplicar filtros
       if (filtros.categoria) {
